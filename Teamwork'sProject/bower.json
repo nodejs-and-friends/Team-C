@@ -1,0 +1,21 @@
+{
+  "name": "NodeJs - Team C",
+  "description": "Teamwork for NodeJS by telerik students",
+  "main": "index.js",
+  "authors": [
+    "Team C"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
