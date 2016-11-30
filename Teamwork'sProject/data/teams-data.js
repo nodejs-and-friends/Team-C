@@ -15,9 +15,11 @@ module.exports = function(models) {
 				});
 			}); 
 		},
-		createTeam(name, users) {
+		createTeam(name, form, github, users) {
 			let team = new Team({
 				name,
+				form,
+				github,
 				users
 			});
 
@@ -31,24 +33,7 @@ module.exports = function(models) {
 				});
 			});
 		},
-		// getTeamById(id) {
-		// 	// console.log("id = " + id);
-		// 	return new Promise((res, rej) => {
-		// 		Team.findOne({_id: id}, (err, team) => {
-		// 			if (err) {
-		// 				return rej(err);
-		// 			}
-
-		// 			if (team === null) {
-		// 				return rej("No such team.");
-		// 			}
-
-		// 			return res(team);
-		// 		});
-		// 	});	
-		// }
 		getTeamById(id) {
-			// console.log("id = " + id);
 			return new Promise((res, rej) => {
 				Team.findOne({_id: id}, (err, team) => {
 					if (err) {

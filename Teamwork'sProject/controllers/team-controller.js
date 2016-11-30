@@ -24,20 +24,15 @@ module.exports = function (data) {
 		},
 		create(req, res) {
 			let body = req.body;
+
+			let name = body.name;
+			let form = body.form;
+			let github = body.github;
 			// console.log(body);
-			data.createTeam(body.name, body.users)
+			data.createTeam(name, form, github, body.users)
 				.then(() => {
 					res.redirect("/teams");
 				});
 		}
 	};
 };
-
-            // const id = req.params.pasteId;
-
-            // data.pasteById(id)
-            //     .then(paste => res.status(200).json(paste))
-            //     .catch(error => {
-            //         console.log(error);
-            //         res.status(500).json(error);
-            //     });
