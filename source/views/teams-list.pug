@@ -2,16 +2,18 @@ extends layout
 
 block app-title
 	| List
-block content
+block container
 	h1 Teams
-	table
+	div#team-list
 		each team in result
-			tr
-				td
+			div.row
+				div.col-md-3
 					a(href="/teams/" + team.id)= team.name
-				td
+				div.col-md-2
 					em
 						strong #{team.form}
-				td
+				div.col-md-3
 					em
 						strong #{team.github}
+				div.col-md-3
+					a.btn.btn-success(href="#") Join team

@@ -2,16 +2,20 @@ extends layout
 
 block app-title
     | Create
-block content
-    form(method="post" action="/teams")
-        label
-            | Name:
-            input(type="text" name="name")
-        label
-            | Form:
-            input(type="text" name="form")
-        label
-            | github:
-            input(type="text" name="github")
-        input(type="submit" value="Create")
-        //a.btn.btn-success(href="#") Click
+block container
+    div#team-create
+        form(method="post" action="/teams")
+            div.form-group.row
+                div.col-md-3
+                    label Name: 
+                        input(type="text" name="name").form-control
+                div.col-md-3
+                    label github: 
+                        input(type="text" name="github").form-control
+                div.col-md-3
+                    label Form:
+                        select(name="form").form-control
+                            option(value="onsite") On site
+                            option(value="online") Online
+            div.row
+            input(type="submit" value="Create").btn.btn-submit
