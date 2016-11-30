@@ -1,6 +1,10 @@
 body {
-	color : black;
-	
+	color : black;	
+}
+
+body, div, ul{
+	margin: 0px;
+	padding: 0px;
 }
 
 body div.container{

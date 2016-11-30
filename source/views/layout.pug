@@ -8,7 +8,23 @@ head
 	link(rel="stylesheet" href="/static/css/main.css")
 	link(rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.css")
 body
-	.container
-		nav
-			a(href="/") Home
+	nav.navbar.navbar-default
+		div.container-fluid
+			div.navbar-header
+				a(href="/").navbar-brand teamwork-connect
+			ul.nav.navbar-nav
+				li.active
+					a(href="/") Home
+				li
+					a(href="/teams") View Teams
+				li
+					a(href="/teams/create") Create Team
+			ul.nav.navbar-nav.navbar-right
+				li
+					a(href="/")
+						span.glyphicon.glyphicon-user Sign Up
+				li
+					a(href="/")
+						span.glyphicon.glyphicon-log-in Login
+	div.container
 		block container
