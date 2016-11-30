@@ -1,0 +1,29 @@
+{
+  "name": "teamwork-connect",
+  "version": "1.0.0",
+  "description": "Teamwork for NodeJS by telerik students",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start": "node ./source/app.js"
+  },
+  "author": "Team C",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "bower": "^1.8.0",
+    "express": "^4.14.0",
+    "mongoose": "^4.7.0",
+    "pug": "^2.0.0-beta6"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nodejs-and-friends/teamwork-connect.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nodejs-and-friends/teamwork-connect/issues"
+  },
+  "homepage": "https://github.com/nodejs-and-friends/teamwork-connect#readme"
+}
