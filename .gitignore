@@ -1,6 +1,9 @@
 ### IDEs
 .idea
 
+### Secrets
+secrets.js
+
 ### Node template
 # Logs
 logs
