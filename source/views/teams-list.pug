@@ -1,0 +1,17 @@
+extends layout
+
+block app-title
+	| List
+block content
+	h1 Teams
+	table
+		each team in result
+			tr
+				td
+					a(href="/teams/" + team.id)= team.name
+				td
+					em
+						strong #{team.form}
+				td
+					em
+						strong #{team.github}
