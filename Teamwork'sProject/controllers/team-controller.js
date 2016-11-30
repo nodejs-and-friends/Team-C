@@ -9,7 +9,8 @@ module.exports = function (data) {
 				});
 		},
 		getById(req, res) {
-			data.getTeamById(req.param.id)
+			// console.log(req.params.id);
+			data.getTeamById(req.params.id)
 				.then(team => {
 					if (team === null) {
 						return res.status(404)
@@ -22,7 +23,6 @@ module.exports = function (data) {
 				});
 		},
 		create(req, res) {
-			console.log(req.body);
 			let body = req.body;
 			// console.log(body);
 			data.createTeam(body.name, body.users)
@@ -32,3 +32,12 @@ module.exports = function (data) {
 		}
 	};
 };
+
+            // const id = req.params.pasteId;
+
+            // data.pasteById(id)
+            //     .then(paste => res.status(200).json(paste))
+            //     .catch(error => {
+            //         console.log(error);
+            //         res.status(500).json(error);
+            //     });

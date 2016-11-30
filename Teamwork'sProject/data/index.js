@@ -5,12 +5,15 @@ const mongoose = require("mongoose");
 const fs = require("fs");
 const path = require("path");
 
+const CONNECTION_URL = "mongodb://localhost/teamCDb";
+
 module.exports = function(config) {
 	mongoose.Promise = global.Promise;
-	mongoose.connect(config.connectionString);
+	mongoose.connect(CONNECTION_URL);
 
 	let Team = require("../models/team.js");
 	let User = require("../models/user.js");
+	
 	let models = {Team, User}
 	let data = {};
 
