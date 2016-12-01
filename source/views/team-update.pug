@@ -1,0 +1,26 @@
+extends layout
+
+block app-title
+    | Create
+block container
+    div#team-create
+        h1 Edit Team
+        form(method="post" action="/teams/" + result.id)
+            input(type="hidden" name="_method" value="PUT")
+            div.form-group.row
+                div.col-md-3
+                    label Name: 
+                        input(type="text" name="name" required value= result.name).form-control
+                div.col-md-2
+                    label Max user for team: 
+                        input(type="text" name="maxUsers" required value= result.maxUsers).form-control
+                div.col-md-4
+                    label GitHub: 
+                        input(type="text" name="github" value= result.github).form-control
+            div.form-group.row
+                div.col-md-6
+                    label Logo: 
+                        input(type="text" name="logo" value= result.logo).form-control
+            div.row
+                div.col-md-6
+                    input(type="submit" value="Edit").btn.btn-info
