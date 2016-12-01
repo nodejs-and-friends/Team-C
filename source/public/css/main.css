@@ -40,8 +40,11 @@ body div.container div#team-list, body div.container div#team-details, body div.
 	opacity: 0.85;
 	padding: 30px!important;
 	border-radius: 30px;
-	position: fixed;
 	width: 90%;
+}
+
+body div.container div#team-details, body div.container div#team-create {
+	position: fixed;
 }
 
 body div.container #team-list {
@@ -78,4 +81,6 @@ nav.navbar {
 	width: 100%;
 	margin: 0px;
 	position: fixed;
+	opacity: 1;
+	z-index: 1;
 }
