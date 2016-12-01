@@ -4,18 +4,25 @@ block app-title
     | Create
 block container
     div#team-create
+        h1 Create Team
+        hr
         form(method="post" action="/teams")
             div.form-group.row
                 div.col-md-3
                     label Name: 
-                        input(type="text" name="name").form-control
-                div.col-md-3
-                    label github: 
-                        input(type="text" name="github").form-control
+                        input(type="text" name="name" required).form-control
                 div.col-md-3
                     label Form:
                         select(name="form").form-control
                             option(value="onsite") On site
                             option(value="online") Online
+                div.col-md-6
+                    label GitHub: 
+                        input(type="text" name="github").form-control
+            div.form-group.row
+                div.col-md-6
+                    label Logo: 
+                        input(type="text" name="logo").form-control
             div.row
-            input(type="submit" value="Create").btn.btn-submit
+                div.col-md-6
+                    input(type="submit" value="Create").btn.btn-info

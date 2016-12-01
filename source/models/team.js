@@ -16,6 +16,9 @@ let schema = new mongoose.Schema({
 	github: {
 		type: String,
 	},
+	logo: {
+		type: String,
+	},
 	users: [{
 
 	}]

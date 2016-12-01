@@ -2,18 +2,33 @@ extends layout
 
 block app-title
 	| List
-block container
-	h1 Teams
+block container	
 	div#team-list
+		div.row
+			div.col-md-6
+				h1 Teams
+			div.col-md-6
+				form.navbar-form.navbar-left
+					div.form-group
+						input(type="text" placeholder="Search").form-control
+					button(type="submit").btn.btn-default Search
+		hr
 		each team in result
 			div.row
 				div.col-md-3
-					a(href="/teams/" + team.id)= team.name
+					h4 
+						a(href="/teams/" + team.id)= team.name
 				div.col-md-2
 					em
 						strong #{team.form}
 				div.col-md-3
-					em
-						strong #{team.github}
+					if team.github
+						em
+							a(href= team.github target="blank") GitHub
+					else
+
 				div.col-md-3
-					a.btn.btn-success(href="#") Join team
+					a.btn(href="#") JOIN
+				div.col-md-1
+					a(href="/teams/update/" + team.id).glyphicon.glyphicon-edit
+					a(href="/teams/remove/" + team.id).glyphicon.glyphicon-remove

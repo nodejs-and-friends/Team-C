@@ -3,6 +3,34 @@ extends layout
 block app-title
 	| Details
 block container
-	h1 Name: #{result.name}
-	h1 Form: #{result.form}
-	h1 Github: #{result.github}
+	div#team-details
+		h1 Team Details
+		hr
+		div.row
+			div.col-md-3
+				if result.logo
+					img(src= result.logo)
+				else 
+					img(src= "http://www.nakov.com/wp-content/uploads/2011/09/image43.png") 
+			div.col-md-2
+				h4 Name:
+				h4 Form:
+				h4 Github:
+				
+			div.col-md-7
+				h4 #{result.name}
+				h4 #{result.form}
+				h4 #{result.github}
+		div.row
+			div.col-md-12
+				h2 Members:
+		div.row
+			div.col-md-12
+				h4 Users applied to this team:
+				div.row
+					div.col-md-8
+						h5 Nikolay wants to join team.
+					div.col-md-2
+						input(type="submit" value="Accept").btn.btn-success
+					div.col-md-2
+						input(type="submit" value="Decline").btn.btn-danger

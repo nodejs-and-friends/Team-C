@@ -1,26 +1,81 @@
 body {
-	color : black;	
+	background-image: url("http://www.wallpapereast.com/static/images/3d-HD-Wallpapers-1080p2_ByMZT0E.jpg");
+	background-color: #333;
 }
 
-body, div, ul{
+body, div, ul, nav{
 	margin: 0px;
 	padding: 0px;
 }
 
+body, header, ul, li, a {
+  	text-decoration: none!important;
+  	color: white!important;
+}
+
+body header nav ul {
+  	list-style-type: none;
+}
+
 body div.container{
-	background-color: #49FFF8;
+	background-color: transparent;
+	
 	min-height: 800px;
 }
 
-body #team-list div.row {
-	margin-top: 10px;
+body div.container a.btn {
+	background-color: #FF005C;
+	border-color: white;
+	height: 45px;
+	font-size: 1.5em!important;
+}
+
+body div.container input.btn {
+	background-color: #FF005C;
+}
+
+body div.container div#team-list, body div.container div#team-details, body div.container div#team-create {
+	margin-top: 100px;
+	background-color: #4f4f4f;
+	opacity: 0.85;
+	padding: 30px!important;
+	border-radius: 30px;
+	position: fixed;
+	width: 90%;
+}
+
+body div.container #team-list {
+	height: 1000px;
+}
+
+body div.container div#team-list h1, body div.container div#team-details h1, body div.container div#team-create h1 {
+	font-size: 4.0em;
 }
 
 body #team-create label {
 	display: block;
 }
 
-body #team-list a.btn {
+body #team-create input.btn {
+	width: 50%;
+}
 
+body #team-list a.btn {
 	min-width: 80%;
+}
+
+body #team-list div.row {
+	margin-top: 10px;
+}
+
+body div#team-details img {
+	margin: 20px;
+	height: 150px;
+	width: 150px;
+}
+
+nav.navbar {
+	width: 100%;
+	margin: 0px;
+	position: fixed;
 }

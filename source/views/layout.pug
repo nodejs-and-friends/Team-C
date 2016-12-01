@@ -7,8 +7,10 @@ head
 		block app-title
 	link(rel="stylesheet" href="/static/css/main.css")
 	link(rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.css")
+	link(rel="stylesheet" href="/static/bower_components/toastr/toastr.css")
+	script(src="/static/bower_components/toastr/toastr.js")
 body
-	nav.navbar.navbar-default
+	nav.navbar.navbar-inverse
 		div.container-fluid
 			div.navbar-header
 				a(href="/").navbar-brand teamwork-connect
@@ -28,3 +30,5 @@ body
 						span.glyphicon.glyphicon-log-in Login
 	div.container
 		block container
+
+	footer

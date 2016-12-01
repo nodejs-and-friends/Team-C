@@ -15,11 +15,12 @@ module.exports = function(models) {
 				});
 			}); 
 		},
-		createTeam(name, form, github, users) {
+		createTeam(name, form, github, logo, users) {
 			let team = new Team({
 				name,
 				form,
 				github,
+				logo,
 				users
 			});
 
@@ -47,6 +48,12 @@ module.exports = function(models) {
 					return res(team);
 				});
 			});	
-		}
+		}, 
+	    updateTeamById(id, updateOptions) {
+	        return Team.findByIdAndUpdate({_id: id}, updateOptions);
+	    },
+        removeTeamById(id) {
+	        return Team.findById({_id: id}).remove();
+	    }
 	};
 };
