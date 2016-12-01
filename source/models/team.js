@@ -19,6 +19,9 @@ let schema = new mongoose.Schema({
 	logo: {
 		type: String,
 	},
+	createdDate: {
+		type: Date,	
+	},
 	users: [{
 
 	}]

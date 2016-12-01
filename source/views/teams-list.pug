@@ -21,7 +21,11 @@ block container
 				div.col-md-2
 					em
 						strong #{team.form}
-				div.col-md-3
+				div.col-md-1
+					if team.createdDate
+						em #{team.createdDate.toLocaleDateString()}
+
+				div.col-md-2
 					if team.github
 						em
 							a(href= team.github target="blank") GitHub

@@ -48,7 +48,7 @@ body div.container div#team-details, body div.container div#team-create {
 }
 
 body div.container #team-list {
-	height: 1000px;
+	min-height: 800px;
 }
 
 body div.container div#team-list h1, body div.container div#team-details h1, body div.container div#team-create h1 {

@@ -16,11 +16,14 @@ module.exports = function(models) {
 			}); 
 		},
 		createTeam(name, form, github, logo, users) {
+			let createdDate = new Date(Date.now()).toLocaleDateString();
+
 			let team = new Team({
 				name,
 				form,
 				github,
 				logo,
+				createdDate,
 				users
 			});
 
