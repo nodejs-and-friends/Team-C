@@ -11,16 +11,19 @@ block container
                 div.col-md-3
                     label Name: 
                         input(type="text" name="name" required).form-control
-                div.col-md-3
+                div.col-md-2
+                    label Max user for team: 
+                        input(type="text" name="maxUsers" required).form-control
+                div.col-md-2
                     label Form:
                         select(name="form").form-control
                             option(value="onsite") On site
                             option(value="online") Online
-                div.col-md-6
+                div.col-md-5
                     label GitHub: 
                         input(type="text" name="github").form-control
             div.form-group.row
-                div.col-md-6
+                div.col-md-5
                     label Logo: 
                         input(type="text" name="logo").form-control
             div.row

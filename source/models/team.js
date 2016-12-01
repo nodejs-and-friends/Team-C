@@ -9,18 +9,26 @@ let schema = new mongoose.Schema({
         required: true,
         unique: true
 	},
+	maxUsers: { 
+		type: Number,
+		required: true,
+		min: 1, 
+		max: 20 
+	},
 	form: {
 		type: String,
-		required: true
+		required: true,
+		minlength: 5
 	},
 	github: {
-		type: String,
+		type: String
 	},
 	logo: {
-		type: String,
+		type: String
 	},
 	createdDate: {
 		type: Date,	
+		required: true
 	},
 	users: [{
 
@@ -30,4 +38,3 @@ let schema = new mongoose.Schema({
 mongoose.model("Team", schema);
 
 module.exports = mongoose.model("Team");
-

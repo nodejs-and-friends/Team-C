@@ -37,7 +37,7 @@ body div.container input.btn {
 body div.container div#team-list, body div.container div#team-details, body div.container div#team-create {
 	margin-top: 100px;
 	background-color: #4f4f4f;
-	opacity: 0.85;
+	opacity: 0.9;
 	padding: 30px!important;
 	border-radius: 30px;
 	width: 90%;
@@ -64,7 +64,11 @@ body #team-create input.btn {
 }
 
 body #team-list a.btn {
-	min-width: 80%;
+	min-width: 100%;
+}
+
+body div.container div#team-list a.glyphicon {
+	margin-right: 10px;
 }
 
 body #team-list div.row {
@@ -83,4 +87,8 @@ nav.navbar {
 	position: fixed;
 	opacity: 1;
 	z-index: 1;
+}
+
+nav.navbar li:hover {
+	background-color: black;
 }

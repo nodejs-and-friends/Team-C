@@ -15,17 +15,21 @@ module.exports = function(models) {
 				});
 			}); 
 		},
-		createTeam(name, form, github, logo, users) {
+		createTeam(name, maxUsers, form, github, logo, users) {
+			maxUsers = +maxUsers;
 			let createdDate = new Date(Date.now()).toLocaleDateString();
 
 			let team = new Team({
 				name,
+				maxUsers,
 				form,
 				github,
 				logo,
 				createdDate,
 				users
 			});
+
+			console.log(team);
 
 			return new Promise((res, rej) => {
 				team.save(err => {
@@ -50,7 +54,7 @@ module.exports = function(models) {
 
 					return res(team);
 				});
-			});	
+			});
 		}, 
 	    updateTeamById(id, updateOptions) {
 	        return Team.findByIdAndUpdate({_id: id}, updateOptions);

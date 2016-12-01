@@ -12,20 +12,35 @@ block container
 					div.form-group
 						input(type="text" placeholder="Search").form-control
 					button(type="submit").btn.btn-default Search
+		div.row
+			div.col-md-4
+				h4 Name
+			div.col-md-1
+				h4 Form
+			div.col-md-1
+				h4 Date
+			div.col-md-1
+				h4 GitHub
+			div.col-md-3
+				h4 Join Team
+			div.col-md-1
+				h4 Edit / Delete
+			div.col-md-1
+				h4 Users
 		hr
 		each team in result
 			div.row
-				div.col-md-3
+				div.col-md-4
 					h4 
 						a(href="/teams/" + team.id)= team.name
-				div.col-md-2
-					em
+				div.col-md-1
+					em(onclick="test()")
 						strong #{team.form}
 				div.col-md-1
 					if team.createdDate
 						em #{team.createdDate.toLocaleDateString()}
 
-				div.col-md-2
+				div.col-md-1
 					if team.github
 						em
 							a(href= team.github target="blank") GitHub
@@ -33,6 +48,8 @@ block container
 
 				div.col-md-3
 					a.btn(href="#") JOIN
+				div.col-md-1
+					h4 #{team.users.length}
 				div.col-md-1
 					a(href="/teams/update/" + team.id).glyphicon.glyphicon-edit
 					a(href="/teams/remove/" + team.id).glyphicon.glyphicon-remove
