@@ -21,5 +21,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ secret: secrets.session }));
 
+require("./authentication")(app);
 
 module.exports = app;
