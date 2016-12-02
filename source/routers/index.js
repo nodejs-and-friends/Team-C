@@ -1,13 +1,7 @@
-/* globals require module __dirname */
-const fs = require("fs");
-const path = require("path");
+"use strict";
 
-const express = require("express");
+const app = require("../config/application");
+app.get("/", (req, res) => res.redirect("/teams"));
 
-module.exports = function (app, data) {
-	fs.readdirSync(__dirname)
-		.filter(x => x.includes("-router"))
-		.forEach(file => {
-			 require(path.join(__dirname, file))(app, data, express);		
-		});
-};
+require("./teams-router");
+require("./identity-router");

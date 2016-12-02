@@ -18,6 +18,13 @@ let UserSchema = new mongoose.Schema({
         required: "Email address is required",
         validate: [validator.validateEmail, "Please fill a valid email address"],
         unique: true
+    },
+
+    password: {
+        type: String,
+        required: "Password is required",
+        minlength: 4,
+        maxlength: 64
     }
 });
 

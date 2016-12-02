@@ -4,12 +4,13 @@ const mongoose = require("mongoose");
 
 const fs = require("fs");
 const path = require("path");
+const config = require("../config");
 const Team = require("../models/team.js");
 const User = require("../models/user.js");
 
 const CONNECTION_URL = "mongodb://localhost/teamCDb";
 
-module.exports = function (config) {
+module.exports = (function () {
     mongoose.Promise = global.Promise;
     mongoose.connect(CONNECTION_URL);
 
@@ -19,6 +20,7 @@ module.exports = function (config) {
     fs.readdirSync(__dirname)
       .filter(x => x.includes("-data"))
       .forEach(file => {
+          // noinspection Eslint
           let dataModule = require(path.join(__dirname, file))(models);
 
           Object.keys(dataModule)
@@ -28,4 +30,4 @@ module.exports = function (config) {
       });
 
     return data;
-};
+}());
