@@ -11,6 +11,6 @@ module.exports = {
 
     isNotCuky(username) {
         const re = /cuki|cuky|cyki|цъки/gi;
-        return re.test(username);
+        return !re.test(username);
     }
 };
