@@ -1,0 +1,35 @@
+extends ../layout
+block app-title
+    | Home
+block container
+    h1 Welcome to teamwork-connect
+
+    include _flash-message
+
+    form.form-horizontal.panel.panel-default.col-lg-5.col-lg-offset-3(method='post')
+        fieldset.panel-body
+            legend Register
+            // Email
+            .form-group
+                label.col-lg-3.control-label(for='email') Email
+                .col-lg-8
+                    input#email.form-control(type='text', placeholder='telerik@academy.com', name='email')
+            // Username
+            .form-group
+                label.col-lg-3.control-label(for='username') Username
+                .col-lg-8
+                    input#username.form-control(type='text', placeholder='Super-cool-nickname', name='username')
+            // Password
+            .form-group
+                label.col-lg-3.control-label(for='password') Password
+                .col-lg-8
+                    input#password.form-control(type='password', placeholder='ConsoleApplication1', name='password')
+            // Repeat Password
+            .form-group
+                label.col-lg-3.control-label(for='repeatPassowrd') Repeat Password
+                .col-lg-8
+                    input#repeatPassowrd.form-control(type='password', placeholder='ConsoleApplication2')
+
+            .form-group
+                .col-lg-8.col-lg-offset-3
+                    button.btn.btn-primary.pull-right(type='submit') Register

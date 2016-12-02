@@ -1,0 +1,25 @@
+extends ../layout.pug
+
+block app-title
+    | Home
+block container
+    h1 Welcome to teamwork-connect
+
+    form.form-horizontal.panel.panel-default.col-lg-5.col-lg-offset-3(method='post')
+        fieldset.panel-body
+            legend Login
+
+            // Username
+            .form-group
+                label.col-lg-2.control-label(for='username') Username
+                .col-lg-8
+                    input#username.form-control(type='text', placeholder='Email', name='username')
+            // Password
+            .form-group
+                label.col-lg-2.control-label(for='password') Password
+                .col-lg-8
+                    input#password.form-control(type='password', placeholder='Password', name='password')
+
+            .form-group
+                .col-lg-8.col-lg-offset-2
+                    button.btn.btn-primary.pull-right(type='submit') Login
