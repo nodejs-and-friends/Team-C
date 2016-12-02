@@ -1,12 +1,13 @@
 /* globals require module */
 
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt-nodejs");
 const validator = require("../utils/validation");
 
 let UserSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true,
+        required: "Username is required",
         maxlength: 20,
         minlength: 3,
         unique: true,
@@ -25,6 +26,37 @@ let UserSchema = new mongoose.Schema({
         required: "Password is required",
         minlength: 4,
         maxlength: 64
+    }
+});
+
+UserSchema.methods.hash = function (pass) {
+
+    if (!pass || pass.length < 4 || pass.length > 64) {
+        throw new Error("Invalid password data");
+    }
+
+    return bcrypt.hashSync(pass, bcrypt.genSaltSync(10), null);
+};
+
+UserSchema.methods.passwordMatches = function (pass) {
+
+    return bcrypt.compareSync(pass, this.password);
+};
+
+UserSchema.pre("save", function (next) {
+
+    if (!this.isModified("password")) {
+
+        return next();
+    }
+
+    try {
+        // hash the password only if modified
+        this.password = this.hash(this.password);
+        return next();
+    }
+    catch (error) {
+        return next(error);
     }
 });
 
