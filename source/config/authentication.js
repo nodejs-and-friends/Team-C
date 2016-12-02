@@ -7,23 +7,47 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const UserRepository = require("../data/UserRepository");
 
-const authStrategy = new LocalStrategy((username, password, done) => {
+const localLogin = new LocalStrategy((username, password, done) => {
 
-    UserRepository.find({ username, password }).findOne()
+    UserRepository.find({ username }).findOne()
                   .exec()
                   .then(user => {
                       console.log(user);
-                      if (user) {
+                      if (user && user.passwordMatches(password)) {
                           done(null, user);
                       }
                       else {
-                          done(null, false);
+                          done(null, false, { message: "Invalid username or password" });
                       }
                   })
-                  .catch(error => done(error, false));
+                  .catch(error => done(error, false, { message: error.message }));
 });
 
-passport.use(authStrategy);
+const localRegister = new LocalStrategy({ passReqToCallback: true }, (req, username, password, done) => {
+
+    UserRepository.find({ username }).findOne()
+                  .exec()
+                  .then(user => {
+
+                      if (user) {
+                          return done(null, false, { message: "Username is already taken" });
+                      }
+
+                      let newUser = {
+                          username,
+                          password,
+                          email: req.body.email
+                      };
+
+                      return UserRepository
+                          .add(newUser)
+                          .then(result => done(null, result));
+                  })
+                  .catch(error => done(null, false, { message: error.message }));
+});
+
+passport.use("localLogin", localLogin);
+passport.use("localRegister", localRegister);
 
 passport.serializeUser((user, done) => done(null, user || false));
 
