@@ -66,8 +66,9 @@ block container
 							div.col-md-8
 								h5 #{appliedUser._id} wants to join team.
 							div.col-md-2
-								form(method="post" action="/teams/accept/" + result.id + "/" + appliedUser._id)
-									input(type="submit" value="Accept").btn.btn-success
+								if (result.maxUsers > result.users.length)
+									form(method="post" action="/teams/accept/" + result.id + "/" + appliedUser._id)
+										input(type="submit" value="Accept").btn.btn-success
 							div.col-md-2
 								form(method="post" action="/teams/decline/" + result.id + "/" + appliedUser._id)
 									input(type="submit" value="Decline").btn.btn-danger

@@ -54,7 +54,6 @@ module.exports = function (data) {
 			let github = body.github;
 			let logo = body.logo;
 			let maxUsers = +body.maxUsers;
-			// let users = body.users;
 
 			data.createTeam(name, maxUsers, form, github, logo)
 				.then(() => {
@@ -131,7 +130,7 @@ module.exports = function (data) {
 		            })
 		            .then(		            	
                 		teamDb => {
-                			res.status(200).redirect("/teams/");
+                			res.status(200).redirect("/teams/" + teamDb.id);
                 			// TODO remove user from appliedUsers
             		})
 			        .catch(error => {

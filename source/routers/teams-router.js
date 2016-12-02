@@ -3,9 +3,9 @@
 const express = require("express");
 // const toastr = require("../public/bower_components/toastr/toastr");
 
+
 module.exports = function(app, data, express) {
 	let router = new express.Router();
-
 	let controller = require("../controllers/team-controller")(data);
 
 	router.get('/', controller.getAll)
