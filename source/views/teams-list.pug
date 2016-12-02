@@ -24,9 +24,9 @@ block container
 			div.col-md-3
 				h4 Join Team
 			div.col-md-1
-				h4 Edit / Delete
+				h4 Users			
 			div.col-md-1
-				h4 Users
+				h4 Edit / Delete
 		hr
 		each team in result
 			div.row
@@ -47,7 +47,8 @@ block container
 					else
 
 				div.col-md-3
-					a.btn(href="#") JOIN
+					form(method="post" action="/teams/join/" + team.id)
+						input(type="submit" value="JOIN").btn.btn-info
 				div.col-md-1
 					h4 #{team.users.length}
 				div.col-md-1

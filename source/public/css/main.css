@@ -34,7 +34,7 @@ body div.container input.btn {
 	background-color: #FF005C;
 }
 
-body div.container div#team-list, body div.container div#team-details, body div.container div#team-create {
+body div.container div#team-list, body div.container div#team-details, body div.container div#team-create, body div.container div#team-update {
 	margin-top: 100px;
 	background-color: #4f4f4f;
 	opacity: 0.9;
@@ -43,7 +43,7 @@ body div.container div#team-list, body div.container div#team-details, body div.
 	width: 90%;
 }
 
-body div.container div#team-details, body div.container div#team-create {
+body div.container div#team-create, body div.container div#team-update {
 	position: fixed;
 }
 
@@ -51,11 +51,18 @@ body div.container #team-list {
 	min-height: 800px;
 }
 
-body div.container div#team-list h1, body div.container div#team-details h1, body div.container div#team-create h1 {
+body div.container div#team-list input.btn {
+	background-color: #FF005C;
+	border-color: white;
+	height: 45px;
+	font-size: 1.5em!important;
+}
+
+body div.container div#team-list h1, body div.container div#team-details h1, body div.container div#team-create h1, body div.container div#team-update h1 {
 	font-size: 4.0em;
 }
 
-body #team-create label {
+body #team-create label, body #team-update label {
 	display: block;
 }
 
@@ -63,7 +70,7 @@ body #team-create input.btn {
 	width: 50%;
 }
 
-body #team-list a.btn {
+body #team-list input.btn {
 	min-width: 100%;
 }
 

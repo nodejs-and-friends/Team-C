@@ -3,7 +3,7 @@ extends layout
 block app-title
     | Create
 block container
-    div#team-create
+    div#team-update
         h1 Edit Team
         form(method="post" action="/teams/" + result.id)
             input(type="hidden" name="_method" value="PUT")
@@ -14,7 +14,7 @@ block container
                 div.col-md-2
                     label Max user for team: 
                         input(type="text" name="maxUsers" required value= result.maxUsers).form-control
-                div.col-md-4
+                div.col-md-5
                     label GitHub: 
                         input(type="text" name="github" value= result.github).form-control
             div.form-group.row

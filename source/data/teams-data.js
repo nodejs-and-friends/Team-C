@@ -15,9 +15,11 @@ module.exports = function(models) {
 				});
 			}); 
 		},
-		createTeam(name, maxUsers, form, github, logo, users) {
+		createTeam(name, maxUsers, form, github, logo) {
 			maxUsers = +maxUsers;
 			let createdDate = new Date(Date.now()).toLocaleDateString();
+			let users = [];
+			let appliedUsers = [];
 
 			let team = new Team({
 				name,
@@ -26,7 +28,8 @@ module.exports = function(models) {
 				github,
 				logo,
 				createdDate,
-				users
+				users,
+				appliedUsers
 			});
 
 			console.log(team);

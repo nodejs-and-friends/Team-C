@@ -39,16 +39,35 @@ block container
 						h4 Number of users:
 					div.col-md-8
 						h4 #{result.users.length}
-		div.row
-			div.col-md-12
-				h2 Members:
-		div.row
-			div.col-md-12
-				h4 Users applied to this team:
 				div.row
+					div.col-md-4
+						h4 Applied:
 					div.col-md-8
-						h5 Nikolay wants to join team.
-					div.col-md-2
-						input(type="submit" value="Accept").btn.btn-success
-					div.col-md-2
-						input(type="submit" value="Decline").btn.btn-danger
+						h4 #{result.appliedUsers.length}
+		div.row
+			div.col-md-12
+				if result.users.length
+					h4 Members:
+					each user in result.users
+						div.row
+							div.col-md-8
+								h5 #{user}
+							div.col-md-2
+							div.col-md-2
+								form(method="post" action="/teams/removeUser/" + result.id + "/" + user)
+									input(type="submit" value="Remove").btn.btn-danger
+		div.row
+			div.col-md-12
+				if result.appliedUsers.length
+					h4 Users applied to this team:
+
+					each appliedUser in result.appliedUsers
+						div.row
+							div.col-md-8
+								h5 #{appliedUser._id} wants to join team.
+							div.col-md-2
+								form(method="post" action="/teams/accept/" + result.id + "/" + appliedUser._id)
+									input(type="submit" value="Accept").btn.btn-success
+							div.col-md-2
+								form(method="post" action="/teams/decline/" + result.id + "/" + appliedUser._id)
+									input(type="submit" value="Decline").btn.btn-danger

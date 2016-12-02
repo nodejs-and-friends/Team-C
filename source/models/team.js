@@ -32,7 +32,15 @@ let schema = new mongoose.Schema({
 	},
 	users: [{
 
-	}]
+	}],
+	appliedUsers: [{
+        // id: {
+        //     type: String
+        // },
+        name: {
+            username: String
+        }
+    }]
 });
 
 mongoose.model("Team", schema);
