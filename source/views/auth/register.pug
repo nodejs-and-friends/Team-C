@@ -6,14 +6,20 @@ block container
 
     include _flash-message
 
-    form.form-horizontal.panel.panel-default.col-lg-5.col-lg-offset-3(method='post')
+    form#register.form-horizontal.panel.panel-default.col-lg-5.col-lg-offset-3(
+        method='post', data-parsley-validate)
+
         fieldset.panel-body
             legend Register
             // Email
             .form-group
                 label.col-lg-3.control-label(for='email') Email
                 .col-lg-8
-                    input#email.form-control(type='text', placeholder='telerik@academy.com', name='email')
+                    input#email.form-control(
+                        type='email',
+                        placeholder='telerik@academy.com',
+                        name='email',
+                        required)
             // Username
             .form-group
                 label.col-lg-3.control-label(for='username') Username
