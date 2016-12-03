@@ -7,18 +7,24 @@ const gulp = require("gulp");
 const bowerFiles = require("main-bower-files");
 const inject = require("gulp-inject");
 const es = require("event-stream");
+const path = require("path");
+
+const sourceOptions = {
+    read: false,
+    cwd: path.join(__dirname, "/source")
+};
 
 gulp.task("inject-resources", () => {
 
     gulp.src(["source/views/layout/scripts.pug", "source/views/layout/styles.pug"])
 
         .pipe(inject(
-            gulp.src(bowerFiles(), { read: false }), { name: "bower" }
+            gulp.src(bowerFiles(), sourceOptions), { name: "bower" }
         ))
 
         .pipe(inject(es.merge(
-            gulp.src("source/public/css/**/*", { read: false }),
-            gulp.src("source/public/js/**/*", { read: false })
+            gulp.src("public/css/**/*", sourceOptions),
+            gulp.src("public/js/**/*", sourceOptions)
         )))
 
         .pipe(gulp.dest("./source/views/layout/"));
