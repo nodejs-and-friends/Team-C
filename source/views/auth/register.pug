@@ -4,32 +4,56 @@ block app-title
 block container
     h1 Welcome to teamwork-connect
 
-    include _flash-message
+    form.form-horizontal.panel.panel-default.col-lg-6.col-lg-offset-3(
+        method='post', data-parsley-validate)
 
-    form.form-horizontal.panel.panel-default.col-lg-5.col-lg-offset-3(method='post')
         fieldset.panel-body
             legend Register
+
             // Email
             .form-group
-                label.col-lg-3.control-label(for='email') Email
-                .col-lg-8
-                    input#email.form-control(type='text', placeholder='telerik@academy.com', name='email')
+                label.col-lg-4.control-label(for='email') Email
+                .col-lg-7
+                    input#email.form-control(
+                        type='email',
+                        placeholder='telerik@academy.com',
+                        name='email',
+                        required)
+
             // Username
             .form-group
-                label.col-lg-3.control-label(for='username') Username
-                .col-lg-8
-                    input#username.form-control(type='text', placeholder='Super-cool-nickname', name='username')
+                label.col-lg-4.control-label(for='username') Username
+                .col-lg-7
+                    input#username.form-control(
+                        type='text',
+                        placeholder='Super-cool-nickname',
+                        minlength="3"
+                        maxlength="20"
+                        name='username',
+                        required)
+
             // Password
             .form-group
-                label.col-lg-3.control-label(for='password') Password
-                .col-lg-8
-                    input#password.form-control(type='password', placeholder='ConsoleApplication1', name='password')
+                label.col-lg-4.control-label(for='password') Password
+                .col-lg-7
+                    input#password.form-control(
+                    type='password',
+                    placeholder='ConsoleApplication1',
+                    name='password',
+                    minlength="4"
+                    maxlength="64"
+                    required)
+
             // Repeat Password
             .form-group
-                label.col-lg-3.control-label(for='repeatPassowrd') Repeat Password
-                .col-lg-8
-                    input#repeatPassowrd.form-control(type='password', placeholder='ConsoleApplication2')
+                label.col-lg-4.control-label(for='repeatPassowrd') Repeat Password
+                .col-lg-7
+                    input#repeatPassowrd.form-control(
+                        type='password',
+                        placeholder='ConsoleApplication2',
+                        data-parsley-equalto="#password",
+                        required)
 
             .form-group
-                .col-lg-8.col-lg-offset-3
+                .col-lg-7.col-lg-offset-4
                     button.btn.btn-primary.pull-right(type='submit') Register

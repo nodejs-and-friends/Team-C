@@ -10,7 +10,8 @@ module.exports = {
 
     getLogin(req, res) {
 
-        res.render("auth/login", { messages: req.flash("loginMessage") });
+        let messages = req.flash();
+        res.render("auth/login", { messages });
     },
 
     postLogin: passport.authenticate("localLogin", {
@@ -22,7 +23,8 @@ module.exports = {
 
     getRegister(req, res) {
 
-        res.render("auth/register", { messages: req.flash("registerMessage") });
+        let messages = req.flash();
+        res.render("auth/register", { messages });
     },
 
     postRegister: passport.authenticate("localRegister", {
@@ -34,6 +36,7 @@ module.exports = {
 
     getProfile(req, res) {
 
+        let messages = req.flash();
         res.status(200).send(`Welcome ${req.user.username}`);
     },
 
