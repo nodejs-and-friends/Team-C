@@ -1,0 +1,15 @@
+mixin flashMessages(data)
+
+    section#flash-notifications
+
+        if data.error
+            each message, index in data.error
+                .alert.alert-dismissible.alert-danger
+                    button.close(type='button', data-dismiss="alert") &times;
+                    strong= message
+
+        if data.success
+            each message, index in data.success
+                .alert.alert-dismissible.alert-success
+                    button.close(type='button', data-dismiss="alert") &times;
+                        strong= message

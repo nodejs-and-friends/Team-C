@@ -1,0 +1,6 @@
+#flash-notifications {
+    position: fixed;
+    top: 5vh;
+    left: 40vw;
+    z-index: 100;
+}

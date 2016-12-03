@@ -5,10 +5,6 @@ block app-title
 block container
     h1 Welcome to teamwork-connect
 
-    include ../mixins/_flash-alert
-        if messages
-            +flashAlert(messages)
-
     form.form-horizontal.panel.panel-default.col-lg-6.col-lg-offset-3(
         method='post', data-parsley-validate)
         fieldset.panel-body
