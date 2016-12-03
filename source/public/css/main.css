@@ -10,7 +10,7 @@ body, div, ul, nav{
 
 body, header, ul, li, a {
   	text-decoration: none!important;
-  	color: white!important;
+  	color: white;
 }
 
 body header nav ul {
