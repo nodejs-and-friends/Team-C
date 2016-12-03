@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "bower install",
     "prestart": "npm install",
-    "start": "node ./source/app.js"
+    "start": "cd source && node app.js"
   },
   "author": "Team C",
   "license": "MIT",
