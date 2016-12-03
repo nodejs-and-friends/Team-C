@@ -1,3 +1,7 @@
 {
-	"directory": "source/public/bower_components"
+	"directory": "source/public/bower_components",
+    "cwd": "./",
+	"scripts": {
+		"postinstall": "npm run inject-resources"
+	}
 }

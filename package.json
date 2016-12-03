@@ -6,7 +6,8 @@
   "scripts": {
     "postinstall": "bower install",
     "prestart": "npm install",
-    "start": "cd source && node app.js"
+    "start": "cd source && node app.js",
+    "inject-resources": "gulp inject-resources"
   },
   "author": "Team C",
   "license": "MIT",
@@ -25,7 +26,12 @@
     "passport-local": "^1.0.0",
     "pug": "^2.0.0-beta6"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "event-stream": "^3.3.4",
+    "gulp": "^3.9.1",
+    "gulp-inject": "^4.1.0",
+    "main-bower-files": "^2.13.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nodejs-and-friends/teamwork-connect.git"
