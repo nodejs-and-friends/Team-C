@@ -35,12 +35,14 @@ let TeamSchema = new Schema({
 
     github: {
         type: String,
-        validate: validators.isURL()
+        required: false,
+        validate: validators.isURL({ skipEmpty: true })
     },
 
     logo: {
         type: String,
-        validate: validators.isURL()
+        required: false,
+        validate: validators.isURL({ skipEmpty: true })
     },
 
     users: [userReference],

@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
 
     validateRequestData(req);
 
-    if (req.team.creator === req.user.id) {
+    if (req.team.owner.toString() === req.user.id) {
         next();
     }
     else {
