@@ -5,4 +5,34 @@ block app-title
 
 block container
 
-    div= username
+    section.col-md-8.col-md-offset-2
+
+        .panel.panel-info
+            .panel-heading: h3.panel-title
+
+                span.fa.fa-user= username
+
+            .panel-body
+                .col-md-4.profile-picture
+                    img(
+                    src= avatar || 'http://community.blrstartups.com/content/plugins/techchamp/assets/avatars/anon.png',
+                    alt='avatar').img-thumbnail.img-responsive
+
+                ul.list-group.col-md-8
+                    li.list-group-item: .form-group
+                        label.col-md-6.text-right Id
+                        .col-md-6= id
+                    li.list-group-item: .form-group
+                        label.col-md-6.text-right Username
+                        .col-md-6= username
+                    li.list-group-item: .form-group
+                        label.col-md-6.text-right Email
+                        .col-md-6= email
+
+                    each link in externalLinks || []
+
+                        li.list-group-item: .form-group
+
+                            label.col-md-6.text-right= link.name
+                            .col-md-6
+                                a(href= link.href) Visit
