@@ -12,7 +12,7 @@ router.get("/", controller.getAll)
       .post("/decline/:teamId/:userId", controller.declineUserForTeam)
       .post("/removeUser/:teamId/:userId", controller.removeUserForTeam)
       .get("/create", (req, res) => {
-          res.render("team-create");
+          res.render("teams/team-create");
       })
       .get("/:id", controller.getById)
       .post("/", controller.create)
