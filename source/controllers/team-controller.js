@@ -2,6 +2,7 @@
 
 const data = require("../data");
 const TeamRepository = require("../data/TeamRepository");
+const flashErrors = require("../utils/flash-errors");
 
 module.exports = {
     getAll(req, res) {
@@ -51,7 +52,11 @@ module.exports = {
 
         TeamRepository.add(teamData)
                       .then(() => res.status(201).redirect("/teams"))
-                      .catch(error => res.status(500).json(error));
+                      .catch(error => {
+                          flashErrors(req.flash, error);
+
+                          res.redirect("back");
+                      });
     },
     update(req, res) {
         const id = req.params.id,

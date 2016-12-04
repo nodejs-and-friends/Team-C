@@ -103,3 +103,11 @@ nav.navbar li:hover {
 main.container {
 	padding-top: 8rem;
 }
+
+.profile-teams a {
+    margin-left: 1rem;
+}
+
+.profile-teams a:first-child {
+    margin-left: 0;
+}

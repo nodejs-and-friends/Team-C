@@ -5,7 +5,7 @@ block app-title
 
 block container
 
-    section.col-md-8.col-md-offset-2
+    section.col-md-7
 
         .panel.panel-info
             .panel-heading: h3.panel-title
@@ -20,19 +20,41 @@ block container
 
                 ul.list-group.col-md-8
                     li.list-group-item: .form-group
-                        label.col-md-6.text-right Id
+                        label.col-md-4.text-right Id :
                         .col-md-6= id
+
                     li.list-group-item: .form-group
-                        label.col-md-6.text-right Username
+                        label.col-md-4.text-right Username :
                         .col-md-6= username
+
                     li.list-group-item: .form-group
-                        label.col-md-6.text-right Email
+                        label.col-md-4.text-right Email :
                         .col-md-6= email
 
                     each link in externalLinks || []
 
                         li.list-group-item: .form-group
 
-                            label.col-md-6.text-right= link.name
+                            label.col-md-4.text-right= link.name
                             .col-md-6
                                 a(href= link.href) Visit
+
+
+    section.col-md-5
+
+        .panel.panel-info
+            .panel-heading: h3.panel-title.text-center
+
+                span.fa.fa-team You are part of the following teams
+
+            .panel-body.profile-teams
+
+                if (teams && teams.length)
+
+                    each team in teams
+
+                        a.btn.btn-info.pull-left(
+                            href= `/teams/${team.id}`)= team.name
+
+                else
+                    p.lead.text-center You are not part of any teams

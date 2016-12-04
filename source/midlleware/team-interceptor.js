@@ -15,7 +15,7 @@ const teams = require("../data/TeamRepository");
 module.exports = (req, res, next) => {
 
     if (!req.params.id) {
-        notFound(res);
+        notFound(req, res);
     }
 
     teams.get(req.params.id)
@@ -25,11 +25,12 @@ module.exports = (req, res, next) => {
                  return next();
              }
 
-             return notFound(res);
+             return notFound(req, res);
          });
 };
 
-function notFound(res) {
+function notFound(req, res) {
 
-    res.status(404).redirect("back", { messages: { error: ["No such team"] } });
+    req.flash("error", "No such team");
+    res.status(404).redirect("back");
 }

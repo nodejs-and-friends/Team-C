@@ -23,7 +23,7 @@ let TeamSchema = new Schema({
     maxUsers: {
         type: Number,
         required: true,
-        min: 1,
+        min: 2,
         max: 20
     },
 
@@ -50,6 +50,15 @@ let TeamSchema = new Schema({
     appliedUsers: [userReference]
 
 }, { timestamps: true });
+
+TeamSchema.pre("validate", function (next) {
+
+    if (this.users > this.maxUsers) {
+        return next(new Error("Users cannot be more than the max users for the team"));
+    }
+
+    return next();
+});
 
 TeamSchema.pre("save", function (next) {
 
