@@ -4,6 +4,7 @@
   "description": "Teamwork for NodeJS by telerik students",
   "main": "index.js",
   "scripts": {
+    "test": "mocha --reporter spec",
     "postinstall": "bower install",
     "prestart": "npm install",
     "start": "cd source && node app.js",
@@ -28,10 +29,17 @@
     "pug": "^2.0.0-beta6"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "event-stream": "^3.3.4",
     "gulp": "^3.9.1",
     "gulp-inject": "^4.1.0",
-    "main-bower-files": "^2.13.1"
+    "jasmine-core": "^2.5.2",
+    "main-bower-files": "^2.13.1",
+    "mocha": "^3.2.0",
+    "mock-require": "^2.0.0",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0",
+    "supertest": "^2.0.1"
   },
   "repository": {
     "type": "git",
