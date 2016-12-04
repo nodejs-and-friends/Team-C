@@ -27,17 +27,14 @@ mixin teamsTable(teams)
                     em(onclick="test()")
                         strong #{team.form}
                 .col-md-1
-                    if team.createdDate
-                        em #{team.createdDate.toLocaleDateString()}
-
+                    if team.createdAt
+                        em #{team.createdAt.toLocaleDateString()}
                 .col-md-1
                     if team.github
                         em
                             a(href= team.github target="blank") GitHub
-                    else
-
                 .col-md-3
-                    if (team.maxUsers > team.users.length)
+                    if (team.isJoinAllowed)
                         form(method="post" action="/teams/join/" + team.id)
                             input(type="submit" value="JOIN").btn.btn-info
                 .col-md-1

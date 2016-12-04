@@ -58,7 +58,7 @@ body div.container div#team-list input.btn {
 	font-size: 1.5em!important;
 }
 
-body div.container div#team-list h1, body div.container div#team-details h1, body div.container div#team-create h1, body div.container div#team-update h1 {
+body .container div#team-list h1, body div.container div#team-details h1, body div.container div#team-create h1, body div.container div#team-update h1 {
 	font-size: 4.0em;
 }
 
@@ -70,8 +70,8 @@ body #team-create input.btn {
 	width: 50%;
 }
 
-body #team-list input.btn {
-	min-width: 100%;
+body .container div#team-list form>input.btn {
+	width: 100%!important;
 }
 
 body div.container div#team-list a.glyphicon {

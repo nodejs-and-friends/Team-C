@@ -9,6 +9,12 @@ module.exports = {
 
         data.getAllTeams()
             .then(teams => {
+                teams.forEach(function(team) {
+                    if (team.maxUsers > team.users.length){
+                        team.isJoinAllowed = true;
+                    } 
+                });
+
                 res.render("teams/teams-list", { result: teams });
             })
             .catch(error => {
