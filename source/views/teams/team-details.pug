@@ -1,0 +1,78 @@
+extends ../layout/main-layout
+
+block app-title
+    | Details
+block container
+
+    #team-details
+        h1 Team Details
+        hr
+
+        .well
+
+            div.row
+                div.col-md-3
+                    if result.logo
+                        img(src= result.logo)
+                    else
+                        img(src= "http://www.nakov.com/wp-content/uploads/2011/09/image43.png")
+                div.col-md-9
+                    div.row
+                        div.col-md-4
+                            h4 Name:
+                        div.col-md-8
+                            h4 #{result.name}
+                    div.row
+                        div.col-md-4
+                            h4 Form:
+                        div.col-md-8
+                            h4 #{result.form}
+                    div.row
+                        div.col-md-4
+                            h4 Github:
+                        div.col-md-8
+                            h4
+                                a(href= result.github target="blank") #{result.github}
+                    div.row
+                        div.col-md-4
+                            h4 Max number of users:
+                        div.col-md-8
+                            h4 #{result.maxUsers}
+                    div.row
+                        div.col-md-4
+                            h4 Number of users:
+                        div.col-md-8
+                            h4 #{result.users.length}
+                    div.row
+                        div.col-md-4
+                            h4 Applied:
+                        div.col-md-8
+                            h4 #{result.appliedUsers.length}
+            div.row
+                div.col-md-12
+                    if result.users.length
+                        h4 Members:
+                        each user in result.users
+                            div.row
+                                div.col-md-8
+                                    h5 #{user}
+                                div.col-md-2
+                                div.col-md-2
+                                    form(method="post" action="/teams/removeUser/" + result.id + "/" + user)
+                                        input(type="submit" value="Remove").btn.btn-danger
+            div.row
+                div.col-md-12
+                    if result.appliedUsers.length
+                        h4 Users applied to this team:
+
+                        each appliedUser in result.appliedUsers
+                            div.row
+                                div.col-md-8
+                                    h5 #{appliedUser._id} wants to join team.
+                                div.col-md-2
+                                    if (result.maxUsers > result.users.length)
+                                        form(method="post" action="/teams/accept/" + result.id + "/" + appliedUser._id)
+                                            input(type="submit" value="Accept").btn.btn-success
+                                div.col-md-2
+                                    form(method="post" action="/teams/decline/" + result.id + "/" + appliedUser._id)
+                                        input(type="submit" value="Decline").btn.btn-danger
