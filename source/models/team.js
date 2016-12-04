@@ -23,7 +23,7 @@ let TeamSchema = new Schema({
     maxUsers: {
         type: Number,
         required: true,
-        min: 1,
+        min: 2,
         max: 20
     },
 
