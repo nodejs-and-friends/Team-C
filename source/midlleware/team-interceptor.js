@@ -15,22 +15,30 @@ const teams = require("../data/TeamRepository");
 module.exports = (req, res, next) => {
 
     if (!req.params.id) {
-        notFound(req, res);
+        return notFound(req, res);
     }
 
-    teams.get(req.params.id)
-         .then(team => {
-             if (team) {
-                 req.team = team;
-                 return next();
-             }
+    return teams
+        .get(req.params.id)
+        .then(team => {
+            if (team) {
+                req.team = team;
+                return next();
+            }
 
-             return notFound(req, res);
-         });
+            return notFound(req, res);
+        })
+        .catch(err => {
+            if (err.name === "CastError") {
+                return notFound(req, res);
+            }
+
+            return next(err);
+        });
 };
 
 function notFound(req, res) {
 
     req.flash("error", "No such team");
-    res.status(404).redirect("back");
+    res.redirect("back");
 }
