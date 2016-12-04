@@ -1,6 +1,7 @@
 "use strict";
 
 const data = require("../data");
+const TeamRepository = require("../data/TeamRepository");
 
 module.exports = {
     getAll(req, res) {
@@ -45,23 +46,12 @@ module.exports = {
             });
     },
     create(req, res) {
-        let body = req.body;
-        let name = body.name;
-        let form = body.form;
-        let github = body.github;
-        let logo = body.logo;
-        let maxUsers = Number(body.maxUsers);
-        let users = body.users;
+        let teamData = { owner: req.user.id };
+        Object.assign(teamData, req.body);
 
-        data.createTeam(name, maxUsers, form, github, logo, users)
-            .then(() => {
-                // toastr.success("Team named: " + name + " was successfully registered!");
-                res.redirect("/teams");
-            })
-            .catch(error => {
-                console.log(error);
-                res.status(500).json(error);
-            });
+        TeamRepository.add(teamData)
+                      .then(() => res.status(201).redirect("/teams"))
+                      .catch(error => res.status(500).json(error));
     },
     update(req, res) {
         const id = req.params.id,

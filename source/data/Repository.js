@@ -62,6 +62,9 @@ class Repository extends IRepository {
 
 
 function validateIsMongooseModel(model) {
+
+    // Sadly `model instanceof mongoose.Model` returns false and this is the best that stack
+    // had to offer
     if (!model || model.name !== "model") {
         throw new Error("The provided model is not an instance of `mongoose` model");
     }
