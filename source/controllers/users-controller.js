@@ -10,7 +10,7 @@ module.exports = {
     getProfile(req, res) {
 
         let messages = req.flash();
-        res.status(200).send(`Welcome ${req.user.username}`);
+        res.render("users/profile");
     }
 
 };
