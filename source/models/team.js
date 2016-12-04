@@ -51,6 +51,15 @@ let TeamSchema = new Schema({
 
 }, { timestamps: true });
 
+TeamSchema.pre("validate", function (next) {
+
+    if (this.users > this.maxUsers) {
+        return next(new Error("Users cannot be more than the max users for the team"));
+    }
+
+    return next();
+});
+
 TeamSchema.pre("save", function (next) {
 
     if (this.isModified("owner") && !this.users.includes(this.owner)) {
