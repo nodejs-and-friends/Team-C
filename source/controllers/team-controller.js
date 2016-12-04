@@ -7,7 +7,7 @@ module.exports = {
 
         data.getAllTeams()
             .then(teams => {
-                res.render("teams-list", { result: teams });
+                res.render("teams/teams-list", { result: teams });
             })
             .catch(error => {
                 console.log(error);
@@ -22,7 +22,7 @@ module.exports = {
                     return res.status(404)
                               .redirect("/error");
                 }
-                res.render("team-details", { result: team });
+                res.render("teams/team-details", { result: team });
             })
             .catch(error => {
                 console.log(error);
@@ -37,7 +37,7 @@ module.exports = {
                               .redirect("/error");
                 }
 
-                res.render("team-update", { result: team });
+                res.render("teams/team-update", { result: team });
             })
             .catch(error => {
                 console.log(error);

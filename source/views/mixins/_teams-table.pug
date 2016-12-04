@@ -1,0 +1,47 @@
+mixin teamsTable(teams)
+
+    .well
+        .row
+            .col-md-3
+                h4 Name
+            .col-md-1
+                h4 Form
+            .col-md-1
+                h4 Date
+            .col-md-1
+                h4 GitHub
+            .col-md-3
+                h4 Join Team
+            .col-md-1
+                h4 Users
+            .col-md-2
+                h4 Edit / Delete
+        hr
+
+        each team in teams
+            .row
+                .col-md-3
+                    h4
+                        a(href="/teams/" + team.id)= team.name
+                .col-md-1
+                    em(onclick="test()")
+                        strong #{team.form}
+                .col-md-1
+                    if team.createdDate
+                        em #{team.createdDate.toLocaleDateString()}
+
+                .col-md-1
+                    if team.github
+                        em
+                            a(href= team.github target="blank") GitHub
+                    else
+
+                .col-md-3
+                    if (team.maxUsers > team.users.length)
+                        form(method="post" action="/teams/join/" + team.id)
+                            input(type="submit" value="JOIN").btn.btn-info
+                .col-md-1
+                    h4 #{team.users.length}
+                .col-md-2
+                    a(href="/teams/update/" + team.id).glyphicon.glyphicon-edit
+                    a(href="/teams/remove/" + team.id).glyphicon.glyphicon-remove

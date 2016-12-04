@@ -1,0 +1,56 @@
+extends ../layout/main-layout
+
+block app-title
+	| Details
+block container
+	div#team-details
+		h1 Team Details
+		hr
+		div.row
+			div.col-md-3
+				if result.logo
+					img(src= result.logo)
+				else 
+					img(src= "http://www.nakov.com/wp-content/uploads/2011/09/image43.png") 
+			div.col-md-9
+				div.row
+				table
+					tr
+						td
+							h4 Name:
+						td
+							h4 #{result.name}
+					tr
+						td
+							h4 Form:
+						td
+							h4 #{result.form}
+					tr
+						td
+							h4 Github:
+						td
+							h4
+								a(href= result.github target="blank") #{result.github}
+					tr
+						td
+							h4 Max number of users:
+						td
+							h4 #{result.maxUsers}
+					tr
+						td
+							h4 Number of users:
+						td
+							h4 #{result.users.length}
+		div.row
+			div.col-md-12
+				h2 Members:
+		div.row
+			div.col-md-12
+				h4 Users applied to this team:
+				div.row
+					div.col-md-8
+						h5 Nikolay wants to join team.
+					div.col-md-2
+						input(type="submit" value="Accept").btn.btn-success
+					div.col-md-2
+						input(type="submit" value="Decline").btn.btn-danger
