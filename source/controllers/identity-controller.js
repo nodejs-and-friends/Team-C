@@ -3,7 +3,6 @@
  */
 "use strict";
 
-const UserRepository = require("../data/UserRepository");
 const passport = require("passport");
 
 module.exports = {
@@ -33,12 +32,6 @@ module.exports = {
         failureRedirect: "/register",
         failureFlash: true
     }),
-
-    getProfile(req, res) {
-
-        let messages = req.flash();
-        res.status(200).send(`Welcome ${req.user.username}`);
-    },
 
     getUnauthorized(req, res) {
 

@@ -4,7 +4,6 @@
 "use strict";
 
 const express = require("express");
-const passport = require("passport");
 const app = require("../config/application");
 
 const authInterceptor = require("../midlleware/authorization-iterceptor");
@@ -21,8 +20,6 @@ router
     .get("/register", IdentityCtrl.getRegister)
 
     .post("/register", IdentityCtrl.postRegister)
-
-    .get("/profile", authInterceptor, IdentityCtrl.getProfile)
 
     .get("/unauthorized", IdentityCtrl.getUnauthorized);
 
