@@ -14,8 +14,9 @@ let router = new express.Router();
 router
     .get("/login", IdentityCtrl.getLogin)
 
-    .post(
-        "/login", IdentityCtrl.postLogin)
+    .post("/login", IdentityCtrl.postLogin)
+
+    .get("/logout", IdentityCtrl.getLogout)
 
     .get("/register", IdentityCtrl.getRegister)
 

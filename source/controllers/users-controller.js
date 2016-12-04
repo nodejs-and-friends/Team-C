@@ -9,8 +9,7 @@ module.exports = {
 
     getProfile(req, res) {
 
-        let messages = req.flash();
-        res.render("users/profile");
+        res.render("users/profile", req.user);
     }
 
 };
