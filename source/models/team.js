@@ -59,6 +59,16 @@ TeamSchema.pre("save", function (next) {
     next();
 });
 
+/**
+ * @param {User | String} user - User object or objectId string
+ * @returns {boolean}
+ */
+TeamSchema.methods.isTeamOwner = function (user) {
+
+    const id = user.id || user;
+    return id === this.owner;
+};
+
 mongoose.model("Team", TeamSchema);
 
 module.exports = mongoose.model("Team");
