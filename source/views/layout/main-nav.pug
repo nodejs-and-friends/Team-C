@@ -1,0 +1,37 @@
+nav.navbar.navbar-inverse
+    div.container-fluid
+        div.navbar-header
+            a(href="/").navbar-brand teamwork-connect
+
+        ul.nav.navbar-nav
+            li.active
+                a(href="/") Home
+            li
+                a(href="/teams") View Teams
+
+            if isLogged
+
+                li
+                    a(href="/teams/create") Create Team
+                li
+                    a(href="/teams/583eca6d556b593fe0f60980") My Team
+
+        ul.nav.navbar-nav.navbar-right
+
+            if isLogged
+
+                li
+                    a(href="/profile")= `Hi ${username}`
+
+            else
+
+                li
+                    a(href="/login")
+                        span
+                            i.glyphicon.glyphicon-log-in
+                        |  Login
+                li
+                    a(href="/register")
+                        span
+                            i.glyphicon.glyphicon-user
+                        |  Register
