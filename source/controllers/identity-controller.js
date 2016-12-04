@@ -19,6 +19,11 @@ module.exports = {
         failureFlash: true
     }),
 
+    getLogout: (req, res) => {
+        req.logout();
+        res.redirect("/");
+    },
+
     getRegister(req, res) {
 
         res.render("auth/register");
