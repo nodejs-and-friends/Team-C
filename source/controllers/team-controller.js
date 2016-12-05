@@ -71,11 +71,6 @@ module.exports = {
                 }
 
                 let promises = [];
-                // for(var i = 0; i < team.users.length; i++) {
-                //     var promise = $http.get('/data' + i);
-                //     promises.push(promise);
-                // }
-                // $q.all(promises).then(doSomethingAfterAllRequests)
 
                 if (team.users.length > 0)
                     for (let i = 0; i < team.users.length; i++) {
@@ -92,9 +87,6 @@ module.exports = {
                                 team.appliedUsers[j].username = member.username;
                             });
                     }
-
-            // Promise.all(promises).then(res.render("teams/team-details", { result: team })) ;
-
 
             setTimeout(function(){
                  res.render("teams/team-details", { result: team });
