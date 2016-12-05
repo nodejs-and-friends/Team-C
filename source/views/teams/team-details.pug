@@ -58,8 +58,9 @@ block container
                                     h5 #{user}
                                 div.col-md-2
                                 div.col-md-2
-                                    form(method="post" action="/teams/removeUser/" + result.id + "/" + user)
-                                        input(type="submit" value="Remove").btn.btn-danger
+                                    if result.isActionAllowed
+                                        form(method="post" action="/teams/removeUser/" + result.id + "/" + user)
+                                            input(type="submit" value="Remove").btn.btn-danger
             div.row
                 div.col-md-12
                     if result.appliedUsers.length
@@ -68,11 +69,12 @@ block container
                         each appliedUser in result.appliedUsers
                             div.row
                                 div.col-md-8
-                                    h5 #{appliedUser._id} wants to join team.
+                                    h5 #{appliedUser} wants to join team.
                                 div.col-md-2
-                                    if (result.maxUsers > result.users.length)
-                                        form(method="post" action="/teams/accept/" + result.id + "/" + appliedUser._id)
+                                    if (result.isActionAllowed && result.isAcceptButtonAllowed)
+                                        form(method="post" action="/teams/accept/" + result.id + "/" + appliedUser)
                                             input(type="submit" value="Accept").btn.btn-success
                                 div.col-md-2
-                                    form(method="post" action="/teams/decline/" + result.id + "/" + appliedUser._id)
-                                        input(type="submit" value="Decline").btn.btn-danger
+                                    if result.isActionAllowed
+                                        form(method="post" action="/teams/decline/" + result.id + "/" + appliedUser)
+                                            input(type="submit" value="Decline").btn.btn-danger

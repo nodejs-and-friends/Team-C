@@ -34,11 +34,13 @@ mixin teamsTable(teams)
                         em
                             a(href= team.github target="blank") GitHub
                 .col-md-3
-                    if (team.isJoinAllowed)
+                    if team.isJoinAllowed
                         form(method="post" action="/teams/join/" + team.id)
                             input(type="submit" value="JOIN").btn.btn-info
                 .col-md-1
                     h4 #{team.users.length}
                 .col-md-2
-                    a(href="/teams/update/" + team.id).glyphicon.glyphicon-edit
-                    a(href="/teams/remove/" + team.id).glyphicon.glyphicon-remove
+                    if team.isUpdateAllowed
+                        a(href="/teams/update/" + team.id).glyphicon.glyphicon-edit
+                    if team.isDeleteAllowed
+                        a(href="/teams/remove/" + team.id).glyphicon.glyphicon-remove

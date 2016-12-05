@@ -34,14 +34,14 @@ body div.container input.btn {
 	background-color: #FF005C;
 }
 
-body div.container div#team-list, body div.container div#team-details, body div.container div#team-create, body div.container div#team-update {
+body/* .container div#team-list, body .container div#team-details, body .container div#team-create, body .container div#team-update {
 	margin-top: 100px;
 	background-color: #4f4f4f;
 	opacity: 0.9;
 	padding: 30px!important;
 	border-radius: 30px;
 	width: 90%;
-}
+}*/
 
 body div.container div#team-create, body div.container div#team-update {
 	position: fixed;
@@ -74,7 +74,7 @@ body .container div#team-list form>input.btn {
 	width: 100%!important;
 }
 
-body div.container div#team-list a.glyphicon {
+body .container div#team-list a.glyphicon {
 	margin-right: 10px;
 }
 

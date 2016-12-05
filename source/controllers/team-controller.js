@@ -2,19 +2,50 @@
 
 const data = require("../data");
 const TeamRepository = require("../data/TeamRepository");
+const UserRepository = require("../data/UserRepository");
 const flashErrors = require("../utils/flash-errors");
 
 module.exports = {
     getAll(req, res) {
-
         data.getAllTeams()
             .then(teams => {
-                teams.forEach(function(team) {
-                    if (team.maxUsers > team.users.length){
-                        team.isJoinAllowed = true;
-                    } 
-                });
+                if (req.user) {   
+                    let userId = req.user.id;
 
+                    teams.forEach(function(team) {
+                        let areUsersEnough = false;
+                        let isAlreadyApplied = false;
+                        let isAlreadyInTheTeam = false;
+
+                        if (team.owner == userId) {
+                            team.isUpdateAllowed = true;
+                            team.isDeleteAllowed = true;
+                        }    
+                        if (team.users.length >= team.maxUsers ){
+                            areUsersEnough = true;
+                        } 
+
+                        if (!isAlreadyApplied) {
+                            team.appliedUsers.forEach(function(appliedUser) {
+                                if (appliedUser == userId) {
+                                    isAlreadyApplied = true;
+                                }
+                            });
+                        }
+
+                        if (!isAlreadyInTheTeam) {
+                            team.users.forEach(function(existUser) {
+                                if (existUser == userId) {
+                                    isAlreadyInTheTeam = true;
+                                }
+                            });
+                        }
+
+                        if (!areUsersEnough && !isAlreadyApplied && !isAlreadyInTheTeam) {
+                            team.isJoinAllowed = true;
+                        }
+                    });
+                }
                 res.render("teams/teams-list", { result: teams });
             })
             .catch(error => {
@@ -23,13 +54,33 @@ module.exports = {
             });
     },
     getById(req, res) {
-        data.getTeamById(req.params.id)
+        TeamRepository.get(req.params.id)
             .then(team => {
 
                 if (team === null) {
                     return res.status(404)
                               .redirect("/error");
                 }
+
+                if (req.user && team.owner == req.user.id) {
+                    team.isActionAllowed = true;
+                }
+
+                if (team.maxUsers > team.users.length) {
+                    team.isAcceptButtonAllowed = true;
+                }
+
+                // if (team.users.length > 0)
+                //     for (let i = 0; i < team.users.length; i++) {
+                //         UserRepository.get(team.users[i])
+                //             .then(member => {
+                //                 team.users[i].username = member.username;
+                //                 // console.log("username = " + member.username);
+
+                //                 res.render("teams/team-details", { result: team });
+                //             });
+                //     }
+
                 res.render("teams/team-details", { result: team });
             })
             .catch(error => {
@@ -94,10 +145,17 @@ module.exports = {
             });
     },
     addAppliedUser(req, res) {
+        let userId = req.user.id;
+
         data.getTeamById(req.params.id)
-            .then(team => {
+            .then(team => {      
                 let appliedUsers = team.appliedUsers;
-                appliedUsers.push({ name: `other${appliedUsers.length}` });
+
+                let userIndex = appliedUsers.indexOf(userId);
+
+                if (userIndex == -1) {
+                    appliedUsers.push(userId);
+                }
 
                 data.updateTeamById(team.id, { appliedUsers })
                     .then(
@@ -115,37 +173,100 @@ module.exports = {
             });
     },
     acceptUserForTeam(req, res) {
-        let teamId = req.params.teamId;
+        let teamId = req.params.id;
         let userId = req.params.userId;
 
-        data.getTeamById(teamId)
-            .then(teamDb => {
-                let users = teamDb.users;
-                users.push(userId);
+        TeamRepository.get(teamId)
+                      .then(teamDb => {
+                            let users = teamDb.users;
+                            let usersIndex = teamDb.users.indexOf(userId);
 
-                data.updateTeamById(teamDb.id, { users })
-                    .then(
-                        teamDb => {
-                            res.status(200).redirect(`/teams/${teamDb.id}`);
-                            // TODO remove user from appliedUsers
-                        })
-                    .catch(error => {
-                        console.log(error);
-                        res.status(500).json(error);
-                    });
-            })
-            .catch(error => {
-                console.log("test");
-                console.log(error);
-                res.status(500).json(error);
-            });
+                            if (usersIndex == -1) {
+                                users.push(userId);
+                            }
+
+                            data.updateTeamById(teamDb.id, { users })
+                                .then(teamDb => {
+                                    let index = teamDb.appliedUsers.indexOf(userId);
+
+                                    if (index > -1) {
+                                        teamDb.appliedUsers.splice(index, 1);
+                                    }
+
+                                    data.updateTeamById(teamDb.id, { appliedUsers: teamDb.appliedUsers })
+                                        .then(
+                                            teamDb => {
+                                                res.status(200).redirect(`/teams/${teamDb.id}`);
+                                            })
+                                        .catch(error => {
+                                            flashErrors(req.flash, error);
+                                            res.redirect("back");
+                                        });
+                                    })
+                                .catch(error => {
+                                    flashErrors(req.flash, error);
+                                    res.redirect("back");
+                                });
+                      })
+                     .catch(error => {
+                          flashErrors(req.flash, error);
+                          res.redirect("back");
+                      });
     },
     declineUserForTeam(req, res) {
-        // TODO remove from appliedUsers
+        let teamId = req.params.id;
+        let userId = req.params.userId;
+
+        TeamRepository.get(teamId)
+                      .then(teamDb => {
+                            let index = teamDb.appliedUsers.indexOf(userId);
+
+                            if (index > -1) {
+                                teamDb.appliedUsers.splice(index, 1);
+                            }
+
+                            data.updateTeamById(teamDb.id, { appliedUsers: teamDb.appliedUsers })
+                                .then(
+                                    teamDb => {
+                                        res.status(200).redirect(`/teams/${teamDb.id}`);
+                                    })
+                                .catch(error => {
+                                    flashErrors(req.flash, error);
+                                    res.redirect("back");
+                                });
+                      })
+                      .catch(error => {
+                          flashErrors(req.flash, error);
+                          res.redirect("back");
+                      });
+
         res.redirect("/teams/");
     },
     removeUserForTeam(req, res) {
-        // TODO remove from appliedUsers
-        res.redirect("/teams/");
+        let teamId = req.params.id;
+        let userId = req.params.userId;
+
+        TeamRepository.get(teamId)
+                      .then(teamDb => {
+                            let index = teamDb.users.indexOf(userId);
+
+                            if (index > -1) {
+                                teamDb.users.splice(index, 1);
+                            }
+
+                            data.updateTeamById(teamDb.id, { users: teamDb.users })
+                                .then(
+                                    teamDb => {
+                                        res.status(200).redirect(`/teams/${teamDb.id}`);
+                                    })
+                                .catch(error => {
+                                    flashErrors(req.flash, error);
+                                    res.redirect("back");
+                                }); 
+                      })
+                      .catch(error => {
+                          flashErrors(req.flash, error);
+                          res.redirect("back");
+                      });
     }
 };
