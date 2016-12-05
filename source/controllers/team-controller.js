@@ -9,10 +9,10 @@ module.exports = {
     getAll(req, res) {
         data.getAllTeams()
             .then(teams => {
-                if (req.user) {   
+                if (req.user) {
                     let userId = req.user.id;
 
-                    teams.forEach(function(team) {
+                    teams.forEach((team) => {
                         let areUsersEnough = false;
                         let isAlreadyApplied = false;
                         let isAlreadyInTheTeam = false;
@@ -20,13 +20,13 @@ module.exports = {
                         if (team.owner == userId) {
                             team.isUpdateAllowed = true;
                             team.isDeleteAllowed = true;
-                        }    
-                        if (team.users.length >= team.maxUsers ){
+                        }
+                        if (team.users.length >= team.maxUsers) {
                             areUsersEnough = true;
-                        } 
+                        }
 
                         if (!isAlreadyApplied) {
-                            team.appliedUsers.forEach(function(appliedUser) {
+                            team.appliedUsers.forEach((appliedUser) => {
                                 if (appliedUser == userId) {
                                     isAlreadyApplied = true;
                                 }
@@ -34,7 +34,7 @@ module.exports = {
                         }
 
                         if (!isAlreadyInTheTeam) {
-                            team.users.forEach(function(existUser) {
+                            team.users.forEach((existUser) => {
                                 if (existUser == userId) {
                                     isAlreadyInTheTeam = true;
                                 }
@@ -54,7 +54,15 @@ module.exports = {
             });
     },
     getById(req, res) {
-        TeamRepository.get(req.params.id)
+
+        TeamRepository
+            .find({ _id: req.params.id })
+            .findOne()
+            .populate({
+                path: "users appliedUsers",
+                select: "username email"
+            })
+            .exec()
             .then(team => {
 
                 if (team === null) {
@@ -62,7 +70,7 @@ module.exports = {
                               .redirect("/error");
                 }
 
-                if (req.user && team.owner == req.user.id) {
+                if (req.user && team.owner === req.user.id) {
                     team.isActionAllowed = true;
                 }
 
@@ -70,29 +78,7 @@ module.exports = {
                     team.isAcceptButtonAllowed = true;
                 }
 
-                let promises = [];
-
-                if (team.users.length > 0)
-                    for (let i = 0; i < team.users.length; i++) {
-                        UserRepository.get(team.users[i])
-                            .then(member => {
-                                team.users[i].username = member.username;
-                            });
-                    }
-
-               if (team.appliedUsers.length > 0)
-                    for (let j = 0; j < team.appliedUsers.length; j++) {
-                        UserRepository.get(team.appliedUsers[j])
-                            .then(member => {
-                                team.appliedUsers[j].username = member.username;
-                            });
-                    }
-
-            setTimeout(function(){
-                 res.render("teams/team-details", { result: team });
-            }, 1000);
-
-                // res.render("teams/team-details", { result: team });
+                return res.render("teams/team-details", { result: team });
             })
             .catch(error => {
                 console.log(error);
@@ -159,7 +145,7 @@ module.exports = {
         let userId = req.user.id;
 
         data.getTeamById(req.params.id)
-            .then(team => {      
+            .then(team => {
                 let appliedUsers = team.appliedUsers;
 
                 let userIndex = appliedUsers.indexOf(userId);
@@ -189,37 +175,37 @@ module.exports = {
 
         TeamRepository.get(teamId)
                       .then(teamDb => {
-                            let users = teamDb.users;
-                            let usersIndex = teamDb.users.indexOf(userId);
+                          let users = teamDb.users;
+                          let usersIndex = teamDb.users.indexOf(userId);
 
-                            if (usersIndex == -1) {
-                                users.push(userId);
-                            }
+                          if (usersIndex == -1) {
+                              users.push(userId);
+                          }
 
-                            data.updateTeamById(teamDb.id, { users })
-                                .then(teamDb => {
-                                    let index = teamDb.appliedUsers.indexOf(userId);
+                          data.updateTeamById(teamDb.id, { users })
+                              .then(teamDb => {
+                                  let index = teamDb.appliedUsers.indexOf(userId);
 
-                                    if (index > -1) {
-                                        teamDb.appliedUsers.splice(index, 1);
-                                    }
+                                  if (index > -1) {
+                                      teamDb.appliedUsers.splice(index, 1);
+                                  }
 
-                                    data.updateTeamById(teamDb.id, { appliedUsers: teamDb.appliedUsers })
-                                        .then(
-                                            teamDb => {
-                                                res.status(200).redirect(`/teams/${teamDb.id}`);
-                                            })
-                                        .catch(error => {
-                                            flashErrors(req.flash, error);
-                                            res.redirect("back");
-                                        });
-                                    })
-                                .catch(error => {
-                                    flashErrors(req.flash, error);
-                                    res.redirect("back");
-                                });
+                                  data.updateTeamById(teamDb.id, { appliedUsers: teamDb.appliedUsers })
+                                      .then(
+                                          teamDb => {
+                                              res.status(200).redirect(`/teams/${teamDb.id}`);
+                                          })
+                                      .catch(error => {
+                                          flashErrors(req.flash, error);
+                                          res.redirect("back");
+                                      });
+                              })
+                              .catch(error => {
+                                  flashErrors(req.flash, error);
+                                  res.redirect("back");
+                              });
                       })
-                     .catch(error => {
+                      .catch(error => {
                           flashErrors(req.flash, error);
                           res.redirect("back");
                       });
@@ -230,21 +216,21 @@ module.exports = {
 
         TeamRepository.get(teamId)
                       .then(teamDb => {
-                            let index = teamDb.appliedUsers.indexOf(userId);
+                          let index = teamDb.appliedUsers.indexOf(userId);
 
-                            if (index > -1) {
-                                teamDb.appliedUsers.splice(index, 1);
-                            }
+                          if (index > -1) {
+                              teamDb.appliedUsers.splice(index, 1);
+                          }
 
-                            data.updateTeamById(teamDb.id, { appliedUsers: teamDb.appliedUsers })
-                                .then(
-                                    teamDb => {
-                                        res.status(200).redirect(`/teams/${teamDb.id}`);
-                                    })
-                                .catch(error => {
-                                    flashErrors(req.flash, error);
-                                    res.redirect("back");
-                                });
+                          data.updateTeamById(teamDb.id, { appliedUsers: teamDb.appliedUsers })
+                              .then(
+                                  teamDb => {
+                                      res.status(200).redirect(`/teams/${teamDb.id}`);
+                                  })
+                              .catch(error => {
+                                  flashErrors(req.flash, error);
+                                  res.redirect("back");
+                              });
                       })
                       .catch(error => {
                           flashErrors(req.flash, error);
@@ -259,21 +245,21 @@ module.exports = {
 
         TeamRepository.get(teamId)
                       .then(teamDb => {
-                            let index = teamDb.users.indexOf(userId);
+                          let index = teamDb.users.indexOf(userId);
 
-                            if (index > -1) {
-                                teamDb.users.splice(index, 1);
-                            }
+                          if (index > -1) {
+                              teamDb.users.splice(index, 1);
+                          }
 
-                            data.updateTeamById(teamDb.id, { users: teamDb.users })
-                                .then(
-                                    teamDb => {
-                                        res.status(200).redirect(`/teams/${teamDb.id}`);
-                                    })
-                                .catch(error => {
-                                    flashErrors(req.flash, error);
-                                    res.redirect("back");
-                                }); 
+                          data.updateTeamById(teamDb.id, { users: teamDb.users })
+                              .then(
+                                  teamDb => {
+                                      res.status(200).redirect(`/teams/${teamDb.id}`);
+                                  })
+                              .catch(error => {
+                                  flashErrors(req.flash, error);
+                                  res.redirect("back");
+                              });
                       })
                       .catch(error => {
                           flashErrors(req.flash, error);
