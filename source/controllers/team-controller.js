@@ -70,18 +70,37 @@ module.exports = {
                     team.isAcceptButtonAllowed = true;
                 }
 
-                // if (team.users.length > 0)
-                //     for (let i = 0; i < team.users.length; i++) {
-                //         UserRepository.get(team.users[i])
-                //             .then(member => {
-                //                 team.users[i].username = member.username;
-                //                 // console.log("username = " + member.username);
+                let promises = [];
+                // for(var i = 0; i < team.users.length; i++) {
+                //     var promise = $http.get('/data' + i);
+                //     promises.push(promise);
+                // }
+                // $q.all(promises).then(doSomethingAfterAllRequests)
 
-                //                 res.render("teams/team-details", { result: team });
-                //             });
-                //     }
+                if (team.users.length > 0)
+                    for (let i = 0; i < team.users.length; i++) {
+                        UserRepository.get(team.users[i])
+                            .then(member => {
+                                team.users[i].username = member.username;
+                            });
+                    }
 
-                res.render("teams/team-details", { result: team });
+               if (team.appliedUsers.length > 0)
+                    for (let j = 0; j < team.appliedUsers.length; j++) {
+                        UserRepository.get(team.appliedUsers[j])
+                            .then(member => {
+                                team.appliedUsers[j].username = member.username;
+                            });
+                    }
+
+            // Promise.all(promises).then(res.render("teams/team-details", { result: team })) ;
+
+
+            setTimeout(function(){
+                 res.render("teams/team-details", { result: team });
+            }, 1000);
+
+                // res.render("teams/team-details", { result: team });
             })
             .catch(error => {
                 console.log(error);

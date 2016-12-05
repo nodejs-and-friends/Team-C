@@ -55,7 +55,7 @@ block container
                         each user in result.users
                             div.row
                                 div.col-md-8
-                                    h5 #{user}
+                                    h5 #{user.username}
                                 div.col-md-2
                                 div.col-md-2
                                     if result.isActionAllowed
@@ -69,7 +69,7 @@ block container
                         each appliedUser in result.appliedUsers
                             div.row
                                 div.col-md-8
-                                    h5 #{appliedUser} wants to join team.
+                                    h5 #{appliedUser.username} wants to join team.
                                 div.col-md-2
                                     if (result.isActionAllowed && result.isAcceptButtonAllowed)
                                         form(method="post" action="/teams/accept/" + result.id + "/" + appliedUser)
