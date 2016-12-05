@@ -49,7 +49,7 @@ const localRegister = new LocalStrategy({ passReqToCallback: true }, (req, usern
 passport.use("localLogin", localLogin);
 passport.use("localRegister", localRegister);
 
-passport.serializeUser((user, done) => done(null, user || false));
+passport.serializeUser((user, done) => done(null, user.id || false));
 
 passport.deserializeUser((userId, done) => {
 
