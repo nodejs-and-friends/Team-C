@@ -4,7 +4,7 @@
   "description": "Teamwork for NodeJS by telerik students",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter spec",
+    "test": "mocha --reporter spec tests/**/*.js",
     "postinstall": "bower install",
     "prestart": "npm install",
     "start": "cd source && node app.js",
