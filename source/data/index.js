@@ -4,11 +4,10 @@ const mongoose = require("mongoose");
 
 const fs = require("fs");
 const path = require("path");
-const config = require("../config");
 const Team = require("../models/team.js");
 const User = require("../models/user.js");
 
-const CONNECTION_URL = "mongodb://localhost/teamCDb";
+const CONNECTION_URL = require("../../secrets").connectionString;
 
 module.exports = (function () {
     mongoose.Promise = global.Promise;
