@@ -65,7 +65,7 @@ module.exports = {
             .exec()
             .then(team => {
 
-                if (team === null) {
+                if (!team) {
                     return res.status(404)
                               .redirect("/error");
                 }
