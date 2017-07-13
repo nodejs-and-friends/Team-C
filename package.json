@@ -10,6 +10,9 @@
     "start": "cd source && node app.js",
     "inject-resources": "gulp inject-resources"
   },
+  "engines" : { 
+    "node" : "6.11.1"
+  },
   "author": "Team C",
   "license": "MIT",
   "dependencies": {
